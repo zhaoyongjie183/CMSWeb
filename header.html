@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Fixed navbar -->
+<div class="navbar  navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">BIGH<i class="fa fa-circle"></i>TEL</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <!--登录和注册-->
+            <div class=" login-panel">
+                <div class="user-panel">
+                    <i class="fa fa-user"></i>
+                    <div class="user-login" data-toggle="modal" data-target="#login"> 登录</div>
+                    <span>|</span>
+                    <div class="user-register" data-toggle="modal" data-target="#register" >注册</div>
+                </div>
+            </div>
+            <ul class="nav navbar-nav">
+                <li  ><a href="#"  onclick="loadContent('home.html')">首页</a></li>
+                <li><a href="#"  onclick="loadContent('about.html')" >关于我们</a></li>
+                <li><a href="#" onclick="loadContent('supplier.html')">优秀酒店供应商</a></li>
+                <li><a href="#"  onclick="loadContent('management.html')">管理案例</a></li>
+                <li><a href="#"  onclick="loadContent('property.html')">精品酒店物业供需</a></li>
+                <li><a href="#"  onclick="loadContent('specialist.html')">专家介绍</a></li>
+                <li><a href="#" onclick="loadContent('select.html')">数据查询</a></li>
+            </ul>
+
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+<!-- 注册窗口 -->
+<div id="register" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-title">
+                <h1 class="text-center">注册</h1>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="">用户名</label>
+                    <input id="UserName" name="UserName"  class="form-control" type="text" placeholder="字母或数字" >
+                    <p class="username-title" hidden>用户名不正确</p>
+                </div>
+                <div class="form-group">
+                    <label for="">密码</label>
+                    <input id="PassWord" name="PassWord" class="form-control" type="password" placeholder="至少6位字母或数字">
+                    <p class="password-title" hidden>密码强度不够</p>
+                </div>
+                <div class="form-group">
+                    <label for="">再次输入密码</label>
+                    <input id="ConfirmPassword" name="ConfirmPassword" class="form-control" type="password" placeholder="至少6位字母或数字">
+                    <p class="confirmpassword-title" hidden>两次密码不相同</p>
+                </div>
+                <div class="form-group">
+                    <label for="">姓名</label>
+                    <input id="RealName" name="RealName" class="form-control" type="text" placeholder="姓名">
+                    <p class="realname-title" hidden>姓名不能为空</p>
+                </div>
+                <div class="form-group">
+                    <label for="">电话</label>
+                    <input id="Phone" name="Phone" class="form-control" type="text" placeholder="例如:130XXXX">
+                    <p class="Phone-title" hidden>电话不能为空</p>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-primary" type="submit" id="registerSubmit">提交</button>
+                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                </div>
+                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 登录窗口   data-backdrop="static" 点击空白不消失 -->
+<div id="login" class="modal fade" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-title">
+                <h1 class="text-center">登录</h1>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="">用户名</label>
+                    <input id="loginUsername" class="form-control" type="text" placeholder="用户名">
+                    <p class="username-title-login" style="color: red" hidden>用户名不能为空</p>
+                </div>
+                <div class="form-group">
+                    <label for="">密码</label>
+                    <input id="loginPassword" class="form-control" type="password" placeholder="密码">
+                    <p class="username-title-password" style="color: red" hidden>密码不能为空</p>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-primary" type="submit" id="loginSubmit">登录</button>
+                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                </div>
+                <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

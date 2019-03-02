@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>月度查询</title>
+</head>
+<body>
+<div class="container">
+    <div>
+        <h4>首页>>数据查询>>年度查询</h4>
+    </div>
+</div>
+<div class="container">
+    <div class="select-div">
+        <span class="select-city">
+            <label for="">城市</label>
+           <input class="form-control select-city-input" value="成都市" type="text" placeholder="城市">
+        </span>
+        <span class="select-shangquan">
+            <label for="">商圈</label>
+            <select class="form-control select-city-input">
+
+            </select>
+        </span>
+        <span class="select-year">
+            <label for="">年度</label>
+            <select class="form-control select-city-input" id="select-year">
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+            </select>
+        </span>
+        <button class="btn btn-default select-btn-select" type="button" onclick="selectYear()">查询</button>
+        <button class="btn btn-default select-btn-select" type="button" onclick="downyear()">下载</button>
+    </div>
+</div>
+<div class="container select-table">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>酒店名称</th>
+            <th>均价</th>
+            <th>出租率</th>
+            <th>营业收入</th>
+            <th>客户收入</th>
+            <th>餐饮收入</th>
+            <th>康乐收入</th>
+            <th>营业利润</th>
+        </tr>
+        </thead>
+        <tbody class="table-year">
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
