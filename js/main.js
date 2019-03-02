@@ -309,7 +309,31 @@ function loadContent(url) {
         }
         if(url=='about.html')
         {
-            $('.container .main').load(url);
+            $('.container .main').load(url,function () {
+                $.ajax({
+                    type:"get",
+                    url:"http://frontapi.bighotel.vip/Api/GetAboutUs",
+                    contentType: "application/json;charset=utf-8",
+                    dataType:"json",
+                    success:function(data){
+                        var result=jQuery.parseJSON(data);
+                        if(result.Success==true)
+                        {
+                            $('#about-main').append(result.Data.DetailsPage);
+                        }
+                        else
+                        {
+                            console.log("获取失败："+result.Msg);
+                        }
+                    },
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Authorization", token);
+                    },
+                    error:function(jqXHR){
+                        console.log("Error: "+jqXHR.status);
+                    }
+                });
+            });
             $('.container .main').show();
             return;
         }
@@ -477,6 +501,11 @@ function selectYear() {
     var sqid= $(".select-city-input option:selected").val();
     var year= $("#select-year option:selected").text();
     var token= $.session.get('token');
+    if(token==''||token==undefined)
+    {
+        alert("请先登录");
+        return;
+    }
     $.ajax({
         type:"get",
         url:"http://frontapi.bighotel.vip/Api/GetYearData?pageIndex=1&pageSize=1000&year="+year+"&SQID="+sqid,
@@ -525,6 +554,11 @@ function selectmonth() {
     var sqid= $(".select-city-input option:selected").val();
     var monthstr= $("#month-select option:selected").text();
     var token= $.session.get('token');
+    if(token==''||token==undefined)
+    {
+        alert("请先登录");
+        return;
+    }
     var date=new Date;
     var year=date.getFullYear();
     $.ajax({
@@ -575,7 +609,6 @@ function selectmonth() {
 function downmonth() {
     var sqid= $(".select-city-input option:selected").val();
     var monthstr= $("#month-select option:selected").text();
-    var token= $.session.get('token');
     var date=new Date;
     var year=date.getFullYear();
     var userinfo=$.session.get("userInfo");
@@ -584,6 +617,11 @@ function downmonth() {
     {
         var userdata= jQuery.parseJSON(userinfo);
         username=userdata.users.UserName;
+    }
+    if(username==''||username==undefined)
+    {
+        alert("请先登录");
+        return;
     }
     var para=new Object();
     para.CityID=490;
@@ -627,8 +665,8 @@ function downmonth() {
             }
             if (result.code==1)
             {
-                document.getElementById('linkmontha').href="http://report.bighotel.vip"+result.data;
-                //window.open("http://report.bighotel.vip"+result.data);
+                //document.getElementById('linkmontha').href="http://report.bighotel.vip"+result.data;
+                window.open("http://report.bighotel.vip"+result.data);
             }
         }
     );
@@ -646,35 +684,32 @@ function downyear() {
         var userdata= jQuery.parseJSON(userinfo);
         username=userdata.UserName;
     }
+    if(username==''||username==undefined)
+    {
+        alert("请先登录");
+        return;
+    }
     var para=new Object();
     para.CityID=490;
     para.AreaID=sqid;
     para.iYear=year;
     para.UserName=username;
     para.RF=2;
-    $.ajax({
-        type:"post",
-        url:"http://report.bighotel.vip/api/V1/quote/ExportHotelYearReport?T={T}&S={S}&V={V}&TS={TS}&sign={sign}&user={user}",
-        contentType: "application/json;charset=utf-8",
-        dataType:"json",
-        data:JSON.stringify(para),
-        success:function(data){
-            var result=jQuery.parseJSON(data);
-            if(result.Success==true)
-            {
 
-            }
-            else
+    $.post("http://report.bighotel.vip/api/V1/quote/ExportHotelYearReport?T={T}&S={S}&V={V}&TS={TS}&sign={sign}&user={user}",
+        para,
+        function(result,status){
+            var a=result;
+            if (result.code!=1)
             {
-                console.log("获取失败："+result.Msg);
+                alert("下载失败");
+                return;
             }
-        },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader("Authorization", token);
-        },
-        error:function(jqXHR){
-            console.log("Error: "+jqXHR.status);
-        }
-    });
+            if (result.code==1)
+            {
+               // document.getElementById('linkmontha').href="http://report.bighotel.vip"+result.data;
+                window.open("http://report.bighotel.vip"+result.data);
+            }
+        });
 }
 
