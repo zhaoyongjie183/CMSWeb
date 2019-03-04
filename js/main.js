@@ -199,9 +199,12 @@ function loadContent(url) {
                             }
                             var domPage = "";
                             for (var i = 1; i <= result.Data.TotalPages; i++) {
+                                domPage=domPage+" <li class='property-page-first> <a href='# aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                                 domPage = domPage + "<li><a href=\"#\" onclick='ClickManagePage(" + i + ")'>" + i + "</a></li>";
+                                domPage=domPage+" <li><a href=\"#\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
                             }
-                            $('.main .management-page .management-page-first').after(domPage);
+                            $('.main .management-page .pagination').append(domPage);
+
                         }
                         else {
                             console.log("获取失败：" + result.Msg);
@@ -241,9 +244,11 @@ function loadContent(url) {
                             }
                             var domPage = "";
                             for (var i = 1; i <= result.Data.TotalPages; i++) {
+                                domPage=domPage+" <li class='property-page-first> <a href='# aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                                 domPage = domPage + "<li><a href=\"#\" onclick='ClickPropertyPage(" + i + ")'>" + i + "</a></li>";
+                                domPage=domPage+" <li><a href=\"#\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
                             }
-                            $('.main .property-page .property-page-first').after(domPage);
+                            $('.main .property-page .pagination').append(domPage);
                         }
                         else {
                             console.log("获取失败：" + result.Msg);
@@ -274,10 +279,12 @@ function loadContent(url) {
                             for (let index in result.Data) {
                                 dom = dom + "<option value='" + result.Data[index].ID + "'>" + result.Data[index].Name + "</option>";
                             }
-                            ;
                             if (dom.length > 0) {
                                 $('.main .select-div .select-shangquan .form-control').append(dom);
                             }
+                            let date=new Date;
+                            let year=date.getFullYear();
+                            $("#select-year").find("option[value='"+year+"']").attr("selected",true);
                         }
                         else {
                             console.log("获取失败：" + result.Msg);
@@ -397,14 +404,16 @@ function ClickPropertyPage(pageIndex) {
                 };
                 if (dom.length>0)
                 {
-                    $('.main .property-ul').append(dom);
+                    $('.main .property-ul').html(dom);
                 }
                 var domPage="";
                 for(var i=1;i<=result.Data.TotalPages;i++)
                 {
+                    domPage=domPage+" <li class='property-page-first> <a href='# aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                     domPage=domPage+"<li><a href=\"#\" onclick='ClickPropertyPage("+i+")'>"+i+"</a></li>";
+                    domPage=domPage+" <li><a href=\"#\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
                 }
-                $('.main .property-page .property-page-first').after(domPage);
+                $('.main .property-page .pagination').html(domPage);
             }
             else
             {
@@ -478,9 +487,11 @@ function ClickManagePage(pageIndex) {
                 var domPage="";
                 for(var i=1;i<=result.Data.TotalPages;i++)
                 {
+                    domPage=domPage+" <li class='property-page-first> <a href='# aria-label=\"Previous\"><span aria-hidden=\"true\">&laquo;</span></a></li>";
                     domPage=domPage+"<li><a href=\"#\" onclick='ClickManagePage("+i+")'>"+i+"</a></li>";
+                    domPage=domPage+" <li><a href=\"#\" aria-label=\"Next\"><span aria-hidden=\"true\">&raquo;</span></a></li>";
                 }
-                $('.main .management-page .management-page-first').after(domPage);
+                $('.main .management-page .pagination').html(domPage);
             }
             else
             {
@@ -518,7 +529,7 @@ function selectYear() {
                 var dom="";
                 for(let index in result.Data.Items) {
                     dom=dom+"  <tr>";
-                    dom=dom+"<td>"+result.Data.Items[index].HotelName+"</td>";
+                    // dom=dom+"<td>"+result.Data.Items[index].HotelName+"</td>";
                     dom=dom+"<td>"+result.Data.Items[index].AveragePrice+"</td>";
                     dom=dom+"<td>"+result.Data.Items[index].Occupancy+"</td>";
                     dom=dom+"<td>"+result.Data.Items[index].OperatingIncome+"</td>";
@@ -573,7 +584,7 @@ function selectmonth() {
                 var dom="";
                 for(let index in result.Data.Items) {
                    dom=dom+"  <tr>";
-                    dom=dom+"<td>"+result.Data.Items[index].HotelName+"</td>";
+                    // dom=dom+"<td>"+result.Data.Items[index].HotelName+"</td>";
                     dom=dom+"<td>"+result.Data.Items[index].AveragePrice+"</td>";
                     dom=dom+"<td>"+result.Data.Items[index].Occupancy+"</td>";
                     dom=dom+"<td>"+result.Data.Items[index].OperatingIncome+"</td>";

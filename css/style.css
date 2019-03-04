@@ -194,6 +194,7 @@ hr {
 
 /* Blue Wrap */
 
+
 #blue {
 
   padding-top: 35px;
@@ -584,7 +585,7 @@ hr {
   /* display: inline; */
 }
 #wzjj {
-  margin-top: 10px;
+  margin-top: 15px;
 }
 .article-list-row li .article-time{
   color: #999;
@@ -675,9 +676,13 @@ hr {
   width: auto;
   display: inline;;
 }
+.selcct-title
+{
+  margin-top: 10px;
+}
 .select-table
 {
-  margin-top: 20px;
+  margin-top: 50px;
 }
 .select-shangquan,.select-month,.select-year
 {
