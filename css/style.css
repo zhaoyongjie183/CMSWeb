@@ -622,7 +622,7 @@ hr {
 .specialist{
   margin-top: 20px;
   display: block;
-  height: 270px;
+  margin-bottom: 50px;
 }
 .views-field-field-tu-pian {
   float: left;
@@ -634,6 +634,9 @@ hr {
   display: block;
   width: auto;
   padding: 0 2%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
 }
 .views-field {
   padding-left: 20%;
@@ -645,6 +648,8 @@ hr {
 }
 .views-field-title
 {
+  font-weight: 700;
+  font-size: 22px;
   padding: 0 2%;
   color: #303234;
   font-size: 20px;
@@ -683,6 +688,10 @@ hr {
 .select-table
 {
   margin-top: 50px;
+}
+.select-table th,tr
+{
+  text-align: center;
 }
 .select-shangquan,.select-month,.select-year
 {

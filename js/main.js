@@ -304,7 +304,45 @@ function loadContent(url) {
         }
         if (url=='specialist.html')
         {
-            $('.container .main').load(url);
+            $('.container .main').load(url,function () {
+                $.ajax({
+                    type:"get",
+                    url:"http://frontapi.bighotel.vip/Api/GetExpertProList?pageIndex=1&pageSize=20",
+                    contentType: "application/json;charset=utf-8",
+                    dataType:"json",
+                    success:function(data){
+                        var result=jQuery.parseJSON(data);
+                        if(result.Success==true)
+                        {
+                            var dom="";
+                            for (let index in result.Data.Items) {
+                                dom=dom+"<div class=\"specialist\">";
+                                dom = dom + "<div class=\"views-field-field-tu-pian \">";
+                                dom = dom + " <img src='http://frontapi.bighotel.vip"+result.Data.Items[index].PicUrl+"' width=\"200\" height=\"250\"></div>";
+                                dom = dom + "<div class=\"views-field\">";
+                                dom = dom + " <span class=\"views-field-title\">"+result.Data.Items[index].Name+"</span></div>";
+                                dom = dom + "<div class=\"views-field\">";
+                                dom = dom + " <div class=\"field-content\"><b>"+result.Data.Items[index].Title+"</b></div></div>";
+                                dom = dom + " <div class=\"views-field\">";
+                                dom = dom + "  <div class=\"suojin\">";
+                                dom=dom+result.Data.Items[index].Description;
+                                dom=dom+"</div></div></div>";
+                            }
+                            $('#specialist').append(dom);
+                        }
+                        else
+                        {
+                            console.log("获取失败："+result.Msg);
+                        }
+                    },
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Authorization", token);
+                    },
+                    error:function(jqXHR){
+                        console.log("Error: "+jqXHR.status);
+                    }
+                });
+            });
             $('.container .main').show();
             return;
         }
@@ -527,16 +565,15 @@ function selectYear() {
             if(result.Success==true)
             {
                 var dom="";
-                for(let index in result.Data.Items) {
+                for(let index in result.Data.data.Items) {
                     dom=dom+"  <tr>";
-                    // dom=dom+"<td>"+result.Data.Items[index].HotelName+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].AveragePrice+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].Occupancy+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].OperatingIncome+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].RoomIncome+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].FoodIncome+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].RecreationIncome+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].OperatingProfit+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].imonth+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].averagePrice+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].occupancy+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].operatingIncome+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].roomIncome+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].foodIncome+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].recreationIncome+"</td>";
                     dom=dom+"</tr>";
                 };
 
@@ -582,16 +619,15 @@ function selectmonth() {
             if(result.Success==true)
             {
                 var dom="";
-                for(let index in result.Data.Items) {
+                for(let index in result.Data.data.Items) {
                    dom=dom+"  <tr>";
-                    // dom=dom+"<td>"+result.Data.Items[index].HotelName+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].AveragePrice+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].Occupancy+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].OperatingIncome+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].RoomIncome+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].FoodIncome+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].RecreationIncome+"</td>";
-                    dom=dom+"<td>"+result.Data.Items[index].OperatingProfit+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].imonth+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].averagePrice+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].occupancy+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].operatingIncome+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].roomIncome+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].foodIncome+"</td>";
+                    dom=dom+"<td>"+result.Data.data.Items[index].recreationIncome+"</td>";
                     dom=dom+"</tr>";
                 };
 
