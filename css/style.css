@@ -208,7 +208,13 @@ hr {
 
 
 
+
 /* Footer Wrap */
+
+#index-main
+{
+  min-height: 100%;
+}
 
 #f {
 
@@ -688,6 +694,7 @@ hr {
 .select-table
 {
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 .select-table th,tr
 {
@@ -703,6 +710,7 @@ hr {
 {
   margin-bottom: 20px;
   margin-top: 20px;
+  height: calc(60vh);
 }
 .select-ul
 {
@@ -727,4 +735,8 @@ hr {
 .select-ul div p a:hover
 {
   color: red;;
+}
+#about-main
+{
+  margin-bottom: 50px;
 }

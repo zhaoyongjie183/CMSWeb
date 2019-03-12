@@ -14,6 +14,7 @@ $(document).ready(function(){
     });
     //加载脚本
     $(".footer").load("footer.html");
+
 	//登录确认
     $(document).on("click","#loginSubmit",function () {
         if ($("#loginUsername").val()==""||$("#loginUsername").val().length<1)
@@ -380,6 +381,7 @@ function loadContent(url) {
                 });
             });
             $('.container .main').show();
+
             return;
         }
     }
@@ -759,4 +761,6 @@ function downyear() {
             }
         });
 }
+
+
 
