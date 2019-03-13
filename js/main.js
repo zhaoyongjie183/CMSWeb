@@ -136,9 +136,11 @@ function loadContent(url) {
     {
         $('.banner').load(url);
         $('.container .main').hide();
+        $("#index-main").removeClass("index-main");
         return;
     }
 	else {
+        $("#index-main").addClass("index-main");
         $('.index-banner').remove();
         var token = $.session.get('token');
         if (url == 'supplier.html') {
@@ -153,7 +155,7 @@ function loadContent(url) {
                         if (result.Success == true) {
                             var dom = "";
                             for (let index in result.Data) {
-                                dom = dom + " <div class='col-lg-2'><img class='img-rounded center-block' src='http://frontapi.bighotel.vip" + result.Data[index].iLogo + "' width='150' height='150' alt=''>";
+                                dom = dom + " <div class='col-lg-2'><img class='img-rounded center-block' src='http://bg.bighotel.vip" + result.Data[index].iLogo + "' width='150' height='150' alt=''>";
                                 dom = dom + " <h4 class='supplier-h4'>" + result.Data[index].iName + "</h4>";
                                 dom = dom + "</div>";
                             }
@@ -267,6 +269,12 @@ function loadContent(url) {
             return;
         }
         if (url == 'selectmonth.html' || url == 'selectYear.html') {
+            var token= $.session.get('token');
+            if(token==''||token==undefined)
+            {
+                alert("请先登录");
+                return;
+            }
             $('.container .main').load(url,function () {
                 $.ajax({
                     type: "get",
@@ -319,7 +327,7 @@ function loadContent(url) {
                             for (let index in result.Data.Items) {
                                 dom=dom+"<div class=\"specialist\">";
                                 dom = dom + "<div class=\"views-field-field-tu-pian \">";
-                                dom = dom + " <img src='http://frontapi.bighotel.vip"+result.Data.Items[index].PicUrl+"' width=\"200\" height=\"250\"></div>";
+                                dom = dom + " <img src='http://bg.bighotel.vip"+result.Data.Items[index].PicUrl+"' width=\"200\" height=\"250\"></div>";
                                 dom = dom + "<div class=\"views-field\">";
                                 dom = dom + " <span class=\"views-field-title\">"+result.Data.Items[index].Name+"</span></div>";
                                 dom = dom + "<div class=\"views-field\">";
@@ -679,30 +687,7 @@ function downmonth() {
     para.iMonth=monthstr;
     para.UserName=username;
     para.RF=2;
-    // $.ajax({
-    //     type:"post",
-    //     url:"http://www.bighotel.vip:8001/api/V1/quote/ExportHotelMonthReport?T={T}&S={S}&V={V}&TS={TS}&sign={sign}&user={user}",
-    //     contentType: "application/json;charset=utf-8",
-    //     dataType:"json",
-    //     data:JSON.stringify(para),
-    //     success:function(data){
-    //         var result=jQuery.parseJSON(data);
-    //         if(result.Success==true)
-    //         {
-    //
-    //         }
-    //         else
-    //         {
-    //             console.log("获取失败："+result.Msg);
-    //         }
-    //     },
-    //     beforeSend: function(xhr) {
-    //         xhr.setRequestHeader("Authorization", token);
-    //     },
-    //     error:function(jqXHR){
-    //         console.log("Error: "+jqXHR.status);
-    //     }
-    // });
+
     $.post("http://report.bighotel.vip/api/V1/quote/ExportHotelMonthReport?T={T}&S={S}&V={V}&TS={TS}&sign={sign}&user={user}",
         para,
         function(result,status){
@@ -731,7 +716,7 @@ function downyear() {
     if ( userinfo!=undefined&&userinfo!=''&&userinfo!='null')
     {
         var userdata= jQuery.parseJSON(userinfo);
-        username=userdata.UserName;
+        username=userdata.users.UserName;
     }
     if(username==''||username==undefined)
     {
