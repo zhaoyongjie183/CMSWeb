@@ -228,7 +228,7 @@ function loadContent(url) {
             $('.container .main').load(url,function () {
                 $.ajax({
                     type: "get",
-                    url: "http://frontapi.bighotel.vip/Api/GetArticleList?pageIndex=1&pageSize=10",
+                    url: "http://frontapi.bighotel.vip/Api/GetpPertyList?pageIndex=1&pageSize=10",
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     success: function (data) {
